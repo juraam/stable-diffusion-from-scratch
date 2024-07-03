@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from src.modules import PositionalEmbedding, ResnetBlock, SequenceWithTimeEmbedding, MultiheadAttention, DownBlock, UpBlock
+from src.diffusion.modules import PositionalEmbedding, ResnetBlock, SequenceWithTimeEmbedding, MultiheadAttention, DownBlock, UpBlock
 
 class UNet(nn.Module):
     def __init__(
@@ -11,14 +11,11 @@ class UNet(nn.Module):
             steps=(1, 2, 4),
             hid_size = 128,
             attn_steps = [2],
-            use_time_emb=True,
             has_residuals=True,
             num_resolution_blocks=2,
             is_debug = False
         ):
         super().__init__()
-
-        self.use_time_emb = use_time_emb
 
         time_emb_dim = hid_size * 4
         self.time_embedding = nn.Sequential(
@@ -105,10 +102,7 @@ class UNet(nn.Module):
         ])
 
     def forward(self, x, t):
-        if self.use_time_emb:
-            time_emb = self.time_embedding(t)
-        else:
-            time_emb = None
+        time_emb = self.time_embedding(t)
 
         x = self.first_conv(x)
         hx = []

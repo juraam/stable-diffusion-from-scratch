@@ -1,5 +1,5 @@
 import torch
-from src.ddpm.ddpm import DDPM
+from src.diffusion.ddpm import DDPM
 import tqdm
 from torch.utils.data.dataloader import DataLoader
 

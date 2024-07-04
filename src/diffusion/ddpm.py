@@ -25,24 +25,40 @@ class DDPM(nn.Module):
         self.criterion = nn.MSELoss()
 
     def forward(self, imgs):
+        # random choose some time steps
         t = torch.randint(low=1, high=self.T+1, size=(imgs.shape[0],), device=self.device)
+
+        # get random noise to add it to the images
         noise = torch.randn_like(imgs, device=self.device)
+
+        # get noise image as: sqrt(alpha_t_bar) * x0 + noise * sqrt(1 - alpha_t_bar)
         batch_size, channels, width, height = imgs.shape
         noise_imgs = self.sqrt_bar_alpha_t_schedule[t].view((batch_size, 1, 1 ,1)) * imgs \
             + self.sqrt_minus_bar_alpha_t_schedule[t].view((batch_size, 1, 1, 1)) * noise
         
+        # get predicted noise from our model
         pred_noise = self.eps_model(noise_imgs, t.unsqueeze(1))
 
+        # calculate of Loss simple ||noise - pred_noise||^2, which is MSELoss
         return self.criterion(pred_noise, noise)
     
     def sample(self, n_samples, size):
         self.eval()
         with torch.no_grad():
+            # get normal noise
             x_t = torch.randn(n_samples, *size, device=self.device)
+            # calculate x_(t-1) on every iteration
             for t in range(self.T, 0, -1):
-                z = torch.randn_like(x_t, device=self.device) if t > 0 else 0
                 t_tensor = torch.tensor([t], device=self.device).repeat(x_t.shape[0], 1)
-                pred_noise = self.nn_model(x_t, t_tensor)
+                # get predicted noise from model
+                pred_noise = self.eps_model(x_t, t_tensor)
+
+                # get some noise to calculate x_(t-1) as in formula (How to get a Noise)
+                # for t = 0, noise should be 0
+                z = torch.randn_like(x_t, device=self.device) if t > 0 else 0
+
+                # Formula from How to get sample
+                # x_(t-1) = 1 / sqrt(alpha_t) * (x_t - pred_noise * (1 - alpha_t) / sqrt(1 - alpha_t_bar)) + beta_t * eps
                 x_t = 1 / torch.sqrt(self.alpha_t_schedule[t]) * \
                     (x_t - pred_noise * (1 - self.alpha_t_schedule[t]) / self.sqrt_minus_bar_alpha_t_schedule[t]) + \
                     torch.sqrt(self.beta_schedule[t]) * z

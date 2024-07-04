@@ -10,7 +10,7 @@ class UNet(nn.Module):
             T,
             steps=(1, 2, 4),
             hid_size = 128,
-            attn_steps = [2],
+            attn_step_indexes = [1],
             has_residuals=True,
             num_resolution_blocks=2,
             is_debug = False
@@ -39,7 +39,7 @@ class UNet(nn.Module):
                         is_residual=has_residuals
                     )
                 )
-                if step in attn_steps:
+                if step in attn_step_indexes:
                     res_blocks.append(
                         MultiheadAttention(
                             n_heads=4,
@@ -79,7 +79,7 @@ class UNet(nn.Module):
                         is_residual=has_residuals
                     )
                 )
-                if step in attn_steps:
+                if len(reverse_steps) - index - 1 in attn_step_indexes:
                     res_blocks.append(
                         MultiheadAttention(
                             n_heads=4,

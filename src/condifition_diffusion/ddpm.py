@@ -52,8 +52,8 @@ class DDPM(nn.Module):
             for t in range(self.T, 0, -1):
                 z = torch.randn_like(x_t, device=self.device) if t > 0 else 0
                 t_tensor = torch.tensor([t], device=self.device).repeat(x_t.shape[0], 1)
-                pred_noise_cond = self.nn_model(x_t, t_tensor, cond, mask_ones)
-                pred_noise_zero = self.nn_model(x_t, t_tensor, cond, mask_zeros)
+                pred_noise_cond = self.eps_model(x_t, t_tensor, cond, mask_ones)
+                pred_noise_zero = self.eps_model(x_t, t_tensor, cond, mask_zeros)
                 pred_noise = (1 + w) * pred_noise_cond - w * pred_noise_zero
                 x_t = 1 / torch.sqrt(self.alpha_t_schedule[t]) * \
                     (x_t - pred_noise * (1 - self.alpha_t_schedule[t]) / self.sqrt_minus_bar_alpha_t_schedule[t]) + \

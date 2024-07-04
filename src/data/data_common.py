@@ -11,3 +11,7 @@ class DataPack:
     val_loader: DataLoader
     transform_to_tensor: Any
     transform_to_pil: Any
+    in_channels: int
+    out_channels: int
+    num_classes: int
+

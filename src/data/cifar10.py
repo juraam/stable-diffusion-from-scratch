@@ -5,21 +5,26 @@ import torch.nn as nn
 import torch
 from dataclasses import dataclass
 from src.data.data_common import DataPack
+import numpy as np
 
-class MNISTTransformation:    
+class CifarTransformation:    
     def __call__(self, tensor: torch.Tensor):
-        return (tensor * -1 + 1).permute(1,2,0).detach().cpu().numpy()
+        return (tensor * 127.5 + 127.5).long().clip(0,255).permute(1,2,0).detach().cpu().numpy()
 
-def get_mnist_loader_and_transform(
+def get_cifar10_loader_and_transform(
     path_to_dataset: str = "./datasets",
     batch_size: int = 128,
     num_workers: int = 2
 ) -> DataPack:
-    transform_to_tensor = transforms.ToTensor()
-    train_dataset = torchvision.datasets.MNIST(root=path_to_dataset, download=True, transform=transform_to_tensor)
+    transform_to_tensor = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((.5,.5,.5), (.5,.5,.5))
+    ])
+    transform_to_pil = CifarTransformation()
+    train_dataset = torchvision.datasets.CIFAR10(root=path_to_dataset, download=True, transform=transform_to_tensor)
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
 
-    val_dataset = torchvision.datasets.MNIST(root=path_to_dataset, download=True, transform=transform_to_tensor, train=False)
+    val_dataset = torchvision.datasets.CIFAR10(root=path_to_dataset, download=True, transform=transform_to_tensor, train=False)
     val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
 
     return DataPack(
@@ -28,9 +33,9 @@ def get_mnist_loader_and_transform(
         val_dataset=val_dataset,
         val_loader=val_dataloader,
         transform_to_tensor=transform_to_tensor,
-        transform_to_pil=MNISTTransformation(),
-        in_channels=1,
-        out_channels=1,
+        transform_to_pil=transform_to_pil,
+        in_channels=3,
+        out_channels=3,
         num_classes=10
     )
 

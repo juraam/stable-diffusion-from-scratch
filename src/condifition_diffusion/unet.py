@@ -11,7 +11,7 @@ class UNet(nn.Module):
             num_classes,
             steps=(1, 2, 4),
             hid_size = 128,
-            attn_steps = [2],
+            attn_step_indexes = [1],
             has_residuals=True,
             num_resolution_blocks=2,
             is_debug = False
@@ -46,7 +46,7 @@ class UNet(nn.Module):
                         is_residual=has_residuals
                     )
                 )
-                if step in attn_steps:
+                if index in attn_step_indexes:
                     res_blocks.append(
                         MultiheadAttention(
                             n_heads=4,
@@ -60,7 +60,7 @@ class UNet(nn.Module):
             if index != len(steps) - 1:
                 self.down_blocks.append(DownBlock())
             prev_hid_size = step * hid_size
-        if len(attn_steps) > 0:
+        if len(attn_step_indexes) > 0:
             self.backbone = SequenceWithTimeEmbedding([
                 ResnetBlock(steps[-1] * hid_size, steps[-1] * hid_size, time_emb_dim=time_emb_dim),
                 MultiheadAttention(n_heads=4, emb_dim=steps[-1] * hid_size, input_dim=steps[-1] * hid_size),
@@ -86,7 +86,7 @@ class UNet(nn.Module):
                         is_residual=has_residuals
                     )
                 )
-                if step in attn_steps:
+                if len(reverse_steps) - index - 1 in attn_step_indexes:
                     res_blocks.append(
                         MultiheadAttention(
                             n_heads=4,

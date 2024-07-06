@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from torch.utils.data.dataset import Dataset
 from torch.utils.data.dataloader import DataLoader
-from typing import Any
+from typing import Any, Tuple, List
 
 @dataclass
 class DataPack:
@@ -14,4 +14,6 @@ class DataPack:
     in_channels: int
     out_channels: int
     num_classes: int
+    recommended_steps: Tuple[int]
+    recommended_attn_step_indexes: List[int]
 

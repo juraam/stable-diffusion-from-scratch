@@ -31,6 +31,8 @@ def get_mnist_loader_and_transform(
         transform_to_pil=MNISTTransformation(),
         in_channels=1,
         out_channels=1,
-        num_classes=10
+        num_classes=10,
+        recommended_steps=(1,2,4),
+        recommended_attn_step_indexes=[1]
     )
 

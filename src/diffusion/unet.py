@@ -53,7 +53,7 @@ class UNet(nn.Module):
             if index != len(steps) - 1:
                 self.down_blocks.append(DownBlock())
             prev_hid_size = step * hid_size
-        if len(attn_steps) > 0:
+        if len(attn_step_indexes) > 0:
             self.backbone = SequenceWithTimeEmbedding([
                 ResnetBlock(steps[-1] * hid_size, steps[-1] * hid_size, time_emb_dim=time_emb_dim),
                 MultiheadAttention(n_heads=4, emb_dim=steps[-1] * hid_size, input_dim=steps[-1] * hid_size),

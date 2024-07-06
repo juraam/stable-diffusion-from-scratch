@@ -36,6 +36,8 @@ def get_cifar10_loader_and_transform(
         transform_to_pil=transform_to_pil,
         in_channels=3,
         out_channels=3,
-        num_classes=10
+        num_classes=10,
+        recommended_steps=(1,2,2,2),
+        recommended_attn_step_indexes=[1,2]
     )
 

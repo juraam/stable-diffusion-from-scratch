@@ -19,8 +19,8 @@ Latent Diffusion models based on Diffusion models(or simple Diffusion). It's the
 2. In this repo you can look at implementation of two different diffusion models: [Conditional Diffusion](https://github.com/juraam/stable-diffusion-from-scratch/tree/main/src/condition_diffusion) and [Simple Diffusion](https://github.com/juraam/stable-diffusion-from-scratch/tree/main/src/diffusion). The Conditional is similar to Stable Diffusion, but it works only number(number means class or digit) input, not text prompts. So it's better to start from Simple Diffusion models.
 
 3. For experiments I have created two jupyter notebooks:
-    * For training and sampling Simple Diffusion
-    * For training and sampling Conditional Diffusion.
+    * For training and sampling [Simple Diffusion]((https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20diffusion.ipynb))
+    * For training and sampling [Conditional Diffusion]((https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20conditional%20diffusion.ipynb)).
 
 ## Code
 
@@ -42,7 +42,7 @@ git lfs fetch --all
 
 ### SAMPLING
 
-If you want to get random samples, open [Simple diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20diffusion.ipynb). Or if you want to control generation with input of classes, open [Conditional diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20conditional%20diffusion.ipynb).
+If you want to get random samples, open [Simple diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20diffusion.ipynb). Or if you want to control a generation with input as class, open [Conditional diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20conditional%20diffusion.ipynb).
 
 All jupyter notebooks have PATH_TO_READY_MODEL, which you should fill to skip the training phase.
 

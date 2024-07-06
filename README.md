@@ -14,7 +14,7 @@ No, everyone needs to understand some basic formulas from statistic theory, a li
 
 Latent diffusion models based on Diffusion models. It's the heart of Stable diffusion and it's really important to understand what diffusion is, how it works and how it is possible to make any picture in our imagination from just a noise. These are my suggestions about steps to understand the information.
 
-1. Start with [Math Explanation.ipynb]("./Math Explanation.ipynb") . This is my expanation of math behind diffusion models, based on great articles of other authors and my research. It took two weeks to understand all details of formulas, but I tried to give information easily.
+1. Start with [Math Explanation.ipynb](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Math%20Explanation.ipynb) . This is my expanation of math behind diffusion models, based on great articles of other authors and my research. It took two weeks to understand all details of formulas, but I tried to give information easily.
 
 2. In this repo you can look at implementation of two different diffusion models: Conditional and Simple. Conditional is similar to Stable Diffusion, but it works only with input numbers(classes), not text prompts. So it's better for understanding to start from Diffusion models
 
@@ -24,7 +24,7 @@ Latent diffusion models based on Diffusion models. It's the heart of Stable diff
 
 ### INSTALL REQUIREMENTS
 
-To start working with code, to download all requirements first:
+To start working with code, please download all required dependencies:
 
 ```shell
 pip install -r requirements.txt

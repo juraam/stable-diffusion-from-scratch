@@ -8,17 +8,19 @@ It is educational repository with purpose to understand how stable diffusion and
 I started this project with purpose to understand how stable diffusion works and what math it uses. I've read a lot of articles with math explanation and code implementation, but I didn't find something which bridges them in the one place.
 
 **Do you need to have a degree to understand math?**<br/>
-No, everyone needs to understand some basic formulas from statistic theory, a little bit algebra, but more important time to spend for analyze and process this information into your brain. Also I try to include links to some basic formulas or good explanation of theory, that you can read if you get stuck.
+It depends on level you have, but I tried to write formulas with all important details and links to resources, which you can read if you get stuck.
 
 ## How better to read this repo?
 
-Latent diffusion models based on Diffusion models. It's the heart of Stable diffusion and it's really important to understand what diffusion is, how it works and how it is possible to make any picture in our imagination from just a noise. These are my suggestions about steps to understand the information.
+Latent diffusion models based on Diffusion models. It's the heart of Stable diffusion and it's really important to understand what diffusion is, how it works and how it's possible to make any picture in our imagination from just a noise. These are my suggestions about steps to understand the information.
 
-1. Start with [Math Explanation.ipynb](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Math%20Explanation.ipynb) . This is my expanation of math behind diffusion models, based on great articles of other authors and my research. It took two weeks to understand all details of formulas, but I tried to give information easily.
+1. Start with [Math Explanation.ipynb](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Math%20Explanation.ipynb) . This is my explanation of math behind diffusion models, based on great articles of other authors and of course my own research. It took two weeks to understand all details of formulas, but I tried to give information easily.
 
-2. In this repo you can look at implementation of two different diffusion models: Conditional and Simple. Conditional is similar to Stable Diffusion, but it works only with input numbers(classes), not text prompts. So it's better for understanding to start from Diffusion models
+2. In this repo you can look at implementation of two different diffusion models: [Conditional Diffusion](https://github.com/juraam/stable-diffusion-from-scratch/tree/main/src/condition_diffusion) and [Simple Diffusion](https://github.com/juraam/stable-diffusion-from-scratch/tree/main/src/diffusion). The Conditional is similar to Stable Diffusion, but it works only number(number means class or digit) input, not text prompts. So it's better to start from Simple Diffusion models.
 
-3. For experiments I created two jupyter notebooks: for training and sampling diffusion and training and sampling conditional diffusion.
+3. For experiments I have created two jupyter notebooks:
+    * For training and sampling Simple Diffusion
+    * For training and sampling Conditional Diffusion.
 
 ## Code
 
@@ -30,19 +32,27 @@ To start working with code, please download all required dependencies:
 pip install -r requirements.txt
 ```
 
+### DOWNLOAD MODELS
+
+I put all models with git lfs, so to get all models just run:
+
+```shell
+git lfs fetch --all
+```
+
 ### SAMPLING
 
 To get samples you should download ready models. You can download them from github with .
 
-If you want to get random samples, open [Simple diffusion]("Train and sample diffusion.ipynb"). Or if you want to control generation with input of classes, open [Conditional diffusion]("Train and sample conditional diffusion.ipynb").
+If you want to get random samples, open [Simple diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20diffusion.ipynb). Or if you want to control generation with input of classes, open [Conditional diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20conditional%20diffusion.ipynb).
 
 All jupyter notebooks have PATH_TO_READY_MODEL, which you should fill to skip the training.
 
 ### TRAINING
 
-If you want to train a simple diffusion, open [Simple diffusion]("Train and sample diffusion.ipynb"), choose dataset (cifar10 or mnist) and run all cells.
+If you want to train a simple diffusion, open [Simple diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20diffusion.ipynb), choose dataset (cifar10 or mnist) and run all cells.
 
-If you want to train a conditional diffusion, open [Conditional diffusion]("Train and sample conditional diffusion.ipynb"), choose dataset (cifar10 or mnist) and run all cells.
+If you want to train a conditional diffusion, open [Conditional diffusion](https://github.com/juraam/stable-diffusion-from-scratch/blob/main/Train%20and%20sample%20conditional%20diffusion.ipynb), choose dataset (cifar10 or mnist) and run all cells.
 
 ## Results of my model
 

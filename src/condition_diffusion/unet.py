@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from src.condifition_diffusion.modules import PositionalEmbedding, ResnetBlock, SequenceWithTimeEmbedding, MultiheadAttention, DownBlock, UpBlock
+from src.condition_diffusion.modules import PositionalEmbedding, ResnetBlock, SequenceWithTimeEmbedding, MultiheadAttention, DownBlock, UpBlock
 
 class UNet(nn.Module):
     def __init__(

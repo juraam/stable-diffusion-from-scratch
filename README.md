@@ -59,8 +59,7 @@ If you want to train a conditional diffusion, open [Conditional diffusion](https
 | Original Diffusion | 3.17          |
 | My Diffusion       | 30            |
 
-<img src="./resources/cifar10.png" width="200px" />
-<img src="./resources/mnist.png" width="200px" />
+<img src="./resources/cifar10.png" width="200px" /> <img src="./resources/mnist.png" width="200px" />
 
 ## References
 

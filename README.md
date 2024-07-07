@@ -70,3 +70,5 @@ If you want to train a conditional diffusion, open [Conditional diffusion](https
 * https://arxiv.org/abs/2207.12598
 * https://github.com/TeaPearce/Conditional_Diffusion_MNIST
 * https://github.com/cloneofsimo/minDiffusion
+* https://theaisummer.com/diffusion-models/
+* https://yang-song.net/blog/2021/score/

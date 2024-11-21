@@ -37,7 +37,7 @@ pip install -r requirements.txt
 I put all models with git lfs, so to get all models, just run:
 
 ```shell
-git lfs fetch --all
+git clone https://huggingface.co/juramoshkov/ddpm models
 ```
 
 ### SAMPLING

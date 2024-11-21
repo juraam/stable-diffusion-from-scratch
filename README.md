@@ -34,7 +34,7 @@ pip install -r requirements.txt
 
 ### DOWNLOAD MODELS
 
-I put all models with git lfs, so to get all models, just run:
+I put all models to huggingfase, so to download models with lfs, just run:
 
 ```shell
 git clone https://huggingface.co/juramoshkov/ddpm models
